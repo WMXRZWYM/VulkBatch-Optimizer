@@ -1,5 +1,6 @@
 <div align="center">
-  <img src="icon.png" width="128" alt="VulkBatch Icon">
+  <img width="256" height="256" alt="V" src="https://github.com/user-attachments/assets/7a954d69-7d05-44be-9700-61b5bd474a7b" />
+
   <h1>VulkBatch</h1>
   <p>A lightweight client-side rendering optimization mod for Minecraft 26.3 (Vulkan/OpenGL).</p>
 
