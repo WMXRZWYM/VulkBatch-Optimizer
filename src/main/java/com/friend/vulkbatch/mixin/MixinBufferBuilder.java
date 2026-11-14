@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BufferBuilder.class)
 public abstract class MixinBufferBuilder {
 
-    @Inject(method = "build", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "build", at = @At("HEAD"))
     private void vulkbatch$interceptBuild(CallbackInfoReturnable<MeshData> cir) {
         if (BatchManager.shouldCoalesce()) {
             BatchManager.defer();

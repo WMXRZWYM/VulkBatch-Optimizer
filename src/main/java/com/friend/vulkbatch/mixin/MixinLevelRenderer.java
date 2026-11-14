@@ -12,20 +12,21 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SectionRenderDispatcher.RenderSection.class)
+@SuppressWarnings("unused")
 public abstract class MixinLevelRenderer {
 
-    @Shadow private volatile long sectionNode;
+    @Shadow
+    private volatile long sectionNode;
 
-    // 精确拦截 compileAsync，参数必须是 RenderSectionRegion
-    @Inject(method = "compileAsync(Lnet/minecraft/client/renderer/chunk/RenderSectionRegion;)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "compileAsync", at = @At("HEAD"), cancellable = true, require = 0)
     private void vulkbatch$skipRedundantRebuild(RenderSectionRegion region, CallbackInfo ci) {
-        if (Minecraft.getInstance().level == null) return;
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null) return;
 
         SectionPos pos = SectionPos.of(this.sectionNode);
-        long currentTick = Minecraft.getInstance().level.getGameTime();
+        long currentTick = mc.level.getGameTime();
 
-        // 如果 5 帧内重复请求重建，直接掐断
-        if (BatchManager.shouldSkipChunkRebuild(pos, currentTick)) {
+        if (BatchManager.shouldSkipChunk(pos, currentTick)) {
             ci.cancel();
         }
     }

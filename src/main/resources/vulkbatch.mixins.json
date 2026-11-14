@@ -3,9 +3,13 @@
   "minVersion": "0.8",
   "package": "com.friend.vulkbatch.mixin",
   "compatibilityLevel": "JAVA_25",
+  "mixins": [],
   "client": [
     "MixinBufferBuilder",
-    "MixinLevelRenderer"
+    "MixinLevelRenderer",
+    "MixinEntityRenderDispatcher",
+    "MixinBlockEntityRenderDispatcher",
+    "MixinParticleEngine"
   ],
   "injectors": {
     "defaultRequire": 1
